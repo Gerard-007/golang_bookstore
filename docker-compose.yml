@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Gerard-007
+      MYSQL_DATABASE: bookstore
+      MYSQL_USER: Gerard
+      MYSQL_PASSWORD: Gerard-007
+    ports:
+      - "3390:3390"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "Gerard", "-pGerard-007"]
+      timeout: 20s
+      retries: 5
+
+volumes:
+  mysql_data:
